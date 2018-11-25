@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import socketIOClient from 'socket.io-client'
 import KitchenItemComponent from './views/kitchen_display_item_compoent'
 import Axios from 'axios'
-
+import { CSVLink, CSVDownload } from "react-csv";
+ 
 export default class MainComponent extends React.Component
 {
 
@@ -31,6 +32,7 @@ export default class MainComponent extends React.Component
     });
 
     const socket = socketIOClient(this.state.endpoint)
+    
     socket.on('expected_quantity_changed', (data) => {
       console.log("event came for updating expected count");
       console.log(data)
@@ -50,6 +52,7 @@ export default class MainComponent extends React.Component
       console.log("setting state...")
       this.setState({...this.state, "items": items})
     })
+
     socket.on('status_changed', (data) => {
       console.log("data received on status change");
       console.log(data);
@@ -108,8 +111,16 @@ export default class MainComponent extends React.Component
       this.setState({...this.state, "items": items})
     })
   }
-
-    render()
+  
+  prepare_data = ()=>{
+    var data = [];
+    data.push(["Dish Name", "Produced Count", "Predicted Count"])
+    this.state.items.forEach(element => {
+      data.push([element.item_name, element.item_completed, element.total_quantity_expected])
+    })
+    return data
+  }
+  render()
     {
       return(
       <div className="card" style={{marginBottom:20, marginLeft: 40, marginTop: 20, marginRight: 40}}>
@@ -154,13 +165,20 @@ export default class MainComponent extends React.Component
                     total_quantity_expected={element.total_quantity_expected}/>
                   </div>
                 )
-  
               }
             })
           }
         </div>
-        <div className="card-footer"></div>
-      </div>
+        <div className="card-footer">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4">
+                <CSVLink filename={"products_inventory_details.csv"} className={"btn btn-danger"} data={this.prepare_data()} target="_blank">Export Data</CSVLink>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
       );
     }    
 }
