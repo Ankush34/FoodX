@@ -94,10 +94,10 @@ export default class MainComponent extends React.Component
     render()
     {
         return(
-            <div className="card" style={{marginTop: 40, marginLeft: 40, marginTop: 20, marginRight: 40}}>
+            <div className="card" style={{marginBottom:20, marginLeft: 40, marginTop: 20, marginRight: 40}}>
                 <div className="card-header">
                     <div className="class-title">
-                        <p> Orders Created </p>
+                        <p> Orders Generated  </p>
                     </div>
                 </div>
                 <div className="card-body">
@@ -132,6 +132,8 @@ export default class MainComponent extends React.Component
                             )
                         })
                     }
+                </div>
+                <div className="card-footer">
                 </div>
             </div>
         );
