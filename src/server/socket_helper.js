@@ -49,5 +49,9 @@ module.exports = {
         })
       }
     })
+    },
+
+    expected_quantity_changed: (data, io)=>{
+      io.sockets.emit('expected_quantity_changed', data);
     }
 }

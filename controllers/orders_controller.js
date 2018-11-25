@@ -111,6 +111,7 @@ module.exports = {
             name: item_name,
             total_quantity_completed: 0,
             total_quantity_pending: count,
+            total_quantity_expected: 0,
             current_status: 'in progress'
         })
         .then(result => {
@@ -122,5 +123,17 @@ module.exports = {
             console.log(error)
             done();
           });
+    },
+
+    updateExpectedCount: (name, count, callback) => 
+    {
+        Order.update({name: name}, {$set: {total_quantity_expected: count}}).exec()
+        .then(result => {
+            console.log(result)
+            callback(result)
+        })
+        .catch(err => (
+            console.log(err)
+        ))
     }
 }

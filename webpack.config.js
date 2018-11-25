@@ -10,6 +10,7 @@ module.exports = {
   {
    dashboard:  './src/client/dashboard.js',
    orders: './src/client/orders.js',
+   edit: './src/client/edit.js'
   },
   output: {
     path: path.join(__dirname, outputDirectory),

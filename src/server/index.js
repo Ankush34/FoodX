@@ -45,6 +45,33 @@ app.patch('/order/:order_id', function(req, res, next){
   })
 });
 
+app.post("/update", function(req,res,next){
+  var name = req.body.data.name
+  var count = req.body.data.count
+  orderController.updateExpectedCount(name, count, (result) => {
+    console.log(result)
+    res.status(200).json({"success": true})
+  })
+});
+
+app.get('/edit', function(req, res, next){
+  var data = {};
+  orderController.findByName(req.query.name,(docs) => {
+    if(docs.length > 0)
+    {
+      console.log("data present already")
+      data = docs[0];
+    }
+    else
+    {
+      orderController.create(req.query.name, 0, (result) => {
+        console.log(result)
+        data = result;
+      })
+    }
+  })
+  res.sendFile(path.join(__dirname,'../../public/', 'edit.html'));
+})
 // this url is responsible for getting orders page that displays complete orders in the kitcher
 // this url checks if the request is json/application or text/html 
 // based upon this it responds with either json or html 
@@ -80,6 +107,10 @@ io.on('connection', socket => {
   socket.on('order_created', (data) => {
     socketHelper.order_created(data, io)
     })
+
+  socket.on('expected_quantity_changed', (data) => {
+    socketHelper.expected_quantity_changed(data, io)
+  })
 
   socket.on('disconnect', () => {
   })

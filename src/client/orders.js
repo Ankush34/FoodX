@@ -25,12 +25,31 @@ export default class MainComponent extends React.Component
       "item_name": element.name, 
       "item_count": element.total_quantity_pending, 
       "item_completed": element.total_quantity_completed,
-      "status": element.current_status
+      "status": element.current_status,
+      "total_quantity_expected": element.total_quantity_expected
       })})});
     });
 
     const socket = socketIOClient(this.state.endpoint)
+    socket.on('expected_quantity_changed', (data) => {
+      console.log("event came for updating expected count");
+      console.log(data)
+      var items = this.state.items;
+      items.map(element => {
+        if(data["name"] === element.item_name)
+        {
+          element["total_quantity_expected"] = data["count"]
+          return(element)
+        }
+        else
+        {
+          return element
+        }
+      })
       
+      console.log("setting state...")
+      this.setState({...this.state, "items": items})
+    })
     socket.on('status_changed', (data) => {
       console.log("data received on status change");
       console.log(data);
@@ -105,30 +124,38 @@ export default class MainComponent extends React.Component
               <div className="col-md-3">
                 <p className="text-primary">Dish Name</p>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <p className="text-primary">In Progress</p>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <p className="text-primary">Current Status</p>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <p className="text-primary">Total Completed Orders</p>
+              </div>
+              <div className="col-md-3">
+                <p className="text-primary">Total Orders Expected</p>
               </div>
             </div>
           </div>
           <br/>
           {
             this.state.items.map(element => {
-              return(
-                <div>
-                  <KitchenItemComponent 
-                  id={element.id}
-                  name = {element.item_name} 
-                  count={element.item_count} 
-                  total_items_completed={element.item_completed}
-                  status={element.status}/>
-                </div>
-              )
+              if(element.item_count !== 0 || element.item_completed !== 0)
+              {
+                return(
+                  <div>
+                    <KitchenItemComponent 
+                    id={element.id}
+                    name = {element.item_name} 
+                    count={element.item_count} 
+                    total_items_completed={element.item_completed}
+                    status={element.status}
+                    total_quantity_expected={element.total_quantity_expected}/>
+                  </div>
+                )
+  
+              }
             })
           }
         </div>

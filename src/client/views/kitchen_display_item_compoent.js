@@ -12,12 +12,13 @@ export default class KitchenItemComponent extends React.Component
         total_items: this.props.total_items_completed, 
         id: this.props.id,
         current_order_status: this.props.status,
-        current_order_count: this.props.count
+        current_order_count: this.props.count,
+        total_quantity_expected: this.props.total_quantity_expected
                   }
   }
   shouldComponentUpdate(props)
   {   
-      if(this.state.current_order_count === props.count)
+      if(this.state.current_order_count === props.count && this.state.total_quantity_expected === props.total_quantity_expected)
       {
           return false
       }
@@ -26,7 +27,8 @@ export default class KitchenItemComponent extends React.Component
         this.setState({...this.state, 
           current_order_count: props.count, 
           current_order_status: props.status,
-          total_items: props.total_items_completed})
+          total_items: props.total_items_completed,
+        total_quantity_expected: props.total_quantity_expected})
         console.log("asking component to update")
         return true
       }
@@ -57,18 +59,21 @@ export default class KitchenItemComponent extends React.Component
             <div className="col-md-3">
               <p>{this.props.name}</p>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
               <p>{this.state.current_order_count}</p>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
               <p onClick={(event) => {
                   this.updateToComplete(this.state.id)}
                 } 
                 className="btn btn-primary">{this.state.current_order_status}
               </p>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-2">
               <p>{this.state.total_items}</p>
+            </div>
+            <div className="col-md-3">
+              <p>{this.state.total_quantity_expected}</p>
             </div>
           </div>
         </div>

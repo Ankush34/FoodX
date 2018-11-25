@@ -37,16 +37,19 @@ export default class OrderItem extends React.Component{
     return(
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <p>{ this.props.name }</p>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
               <input type="number" onChange={(evt)=>this.changeCount(evt)} className="form-control" value={this.state.item_count_to_order} placeholder="count to place order .... "/>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <p onClick={()=>this.send()} className="btn btn-primary" style={{marginLeft: "100"}}>{ "Place Order" }</p>
+          </div>
+          <div className="col-md-3">
+            <a className={"btn btn-danger"} href={`http://localhost:3000/edit?name=${this.props.name}`}> Expected Inventory edit </a>
           </div>
         </div>
       </div>

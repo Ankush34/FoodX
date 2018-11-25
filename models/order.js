@@ -5,6 +5,7 @@ const orderSchema = new mongoose.Schema({
     name: String,
     total_quantity_completed: Number,
     total_quantity_pending: Number,
+    total_quantity_expected: Number,
     current_status: String
 }, {collection: "orders"});
 
