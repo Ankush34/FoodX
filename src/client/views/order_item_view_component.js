@@ -7,7 +7,7 @@ export default class OrderItem extends React.Component{
         super(props)
         this.state = {
             endpoint: "http://localhost:3000", 
-            item_count_to_order: 0,
+            item_count_to_order: "",
             // this is where we are connecting to with sockets
         }
     }
@@ -17,6 +17,7 @@ export default class OrderItem extends React.Component{
         const socket = socketIOClient(this.state.endpoint)
         socket.emit('order_created', {"name": this.props.name, "count": this.state.item_count_to_order}) 
         socket.close
+        this.setState({...this.state, item_count_to_order: ""})
     }
 
     changeCount = (element) => {
@@ -38,7 +39,7 @@ export default class OrderItem extends React.Component{
                     </div>
                     <div className="col-md-4">
                         <div className="form-group">
-                            <input type="text" onChange={(evt)=>this.changeCount(evt)} className="form-control" placeholder="count to place order .... "/>
+                            <input type="number" onChange={(evt)=>this.changeCount(evt)} className="form-control" value={this.state.item_count_to_order} placeholder="count to place order .... "/>
                         </div>
                     </div>
                     <div className="col-md-4">
