@@ -8,8 +8,8 @@ const outputDirectory = 'dist';
 module.exports = {
   entry: 
   {
-   dashboard:  './src/client/index.js',
-   entry: './src/client/entry.js',
+   dashboard:  './src/client/dashboard.js',
+   orders: './src/client/orders.js',
   },
   output: {
     path: path.join(__dirname, outputDirectory),
