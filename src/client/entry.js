@@ -19,7 +19,7 @@ export default class MainComponent extends React.Component
     }
 
     componentDidMount(){
-        Axios.get(`http://localhost:3000/get_orders`,{headers: {"Content-Type": "application/json"}}).then(res => {
+        Axios.get(`http://localhost:3000/orders`,{ headers: {"Content-Type": "application/json"}}).then(res => {
             console.log(res.data);
             this.setState({...this.state, items: res.data.map(element => { return({
             "id": element._id, 

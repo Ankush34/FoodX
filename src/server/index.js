@@ -30,10 +30,6 @@ app.use('/dashboard', function (req, res, next) {
   res.sendFile(path.join(__dirname,'../../public/', 'dashboard.html'));
 });
 
-app.use('/orders', function (req, res, next) {
-  res.sendFile(path.join(__dirname,'../../public/', 'order.html'));
-});
-
 app.patch('/order/:order_id', function(req, res, next){
   console.log("req received")
   console.log(req.params.order_id)
@@ -42,14 +38,22 @@ app.patch('/order/:order_id', function(req, res, next){
   })
 });
 
-app.use("/get_orders", function(req,res,next){
-  orderController.find((orders) => {
-    res.setHeader('Content-Type', 'application/json');
-    console.log("printing orders")
-    console.log(orders)
-    console.log("completed printing")
-    res.status(200).json(orders)
-  })
+app.use("/orders", function(req,res,next){
+  if(req.headers.accept.indexOf('application/json') !== -1)
+  {
+    orderController.find((orders) => {
+      res.setHeader('Content-Type', 'application/json');
+      console.log("printing orders")
+      console.log(orders)
+      console.log("completed printing")
+      res.status(200).json(orders)
+    })
+  }
+  else
+  {
+    res.sendFile(path.join(__dirname,'../../public/', 'order.html'));
+  }
+ 
 });
 
 var port = process.env.PORT || 3000
