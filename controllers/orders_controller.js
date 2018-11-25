@@ -100,7 +100,6 @@ module.exports = {
         })
         .catch((error) => {
             console.log(error)
-            assert.isNotOk(error,'Promise error');
             done();
           });
     }

@@ -101,6 +101,23 @@ export default class MainComponent extends React.Component
                     </div>
                 </div>
                 <div className="card-body">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-3">
+                                <p className="text-primary">Dish Name</p>
+                            </div>
+                            <div className="col-md-3">
+                                <p className="text-primary">In Progress</p>
+                            </div>
+                            <div className="col-md-3">
+                                <p className="text-primary">Current Status</p>
+                            </div>
+                            <div className="col-md-3">
+                                <p className="text-primary">Total Completed Orders</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
                     {
                         this.state.items.map(element => {
                             return(

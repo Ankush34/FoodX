@@ -13,11 +13,14 @@ export default class OrderItem extends React.Component{
     }
 
     send = () => {
-        console.log("sending the event to the server")
-        const socket = socketIOClient(this.state.endpoint)
-        socket.emit('order_created', {"name": this.props.name, "count": this.state.item_count_to_order}) 
-        socket.close
-        this.setState({...this.state, item_count_to_order: ""})
+        if(this.state.item_count_to_order !== "")
+        {
+            console.log("sending the event to the server")
+            const socket = socketIOClient(this.state.endpoint)
+            socket.emit('order_created', {"name": this.props.name, "count": this.state.item_count_to_order}) 
+            socket.close
+            this.setState({...this.state, item_count_to_order: ""})    
+        }
     }
 
     changeCount = (element) => {
