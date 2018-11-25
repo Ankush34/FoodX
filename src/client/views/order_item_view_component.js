@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDom from 'react-dom'
 import socketIOClient from 'socket.io-client'
 
 export default class OrderItem extends React.Component{
@@ -8,7 +7,7 @@ export default class OrderItem extends React.Component{
         super(props)
         this.state = {
             endpoint: "http://localhost:3000", 
-            item_count_to_order: 0
+            item_count_to_order: 0,
             // this is where we are connecting to with sockets
         }
     }

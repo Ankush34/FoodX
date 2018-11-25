@@ -12,7 +12,7 @@ export default class MainComponent extends React.Component
         "Punjabi Starters": ["Paneer Tikka ", "Paneer Garlic Tikka", "Mushroom Tikka", "Mushroom Garlic Tikka", "Paneer Angara Tikka", "Mushroom Angara Tikka", "Paneer Chilli", "Mushroom Chilli", "Babycorn Tikka", "Babycorn Chilli"], 
         "Mexican Starters": ["Alfredo Pasta", "Penne Pasta", "Veg Taco", "Paneer Masala Taco", "Cheese Garlic Taco", "Capcicum Chilli Taco", "Capco Pasta"], 
         "Punjabi Main Course": ["Paneer Chilli", "Paneer Tikka", "Paneer Butter Masala", "Mushroom Tikka Masala", "Mushroom Fry", "Paneer Fry", "Veg kadhai"], 
-        "Indian Breads": ["Roti, Chapati, Punjabi Paratha", "Butter Naan", "Punjabi fulka", "Chapati", "Butter Paratha"]}
+        "Indian Breads": ["Roti", "Chapati", "Punjabi Paratha", "Butter Naan", "Punjabi fulka", "Chapati", "Butter Paratha"]}
         const keys = Object.keys(menu_categories)
         console.log(keys)
         return(
