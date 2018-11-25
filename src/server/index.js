@@ -11,6 +11,9 @@ var mongoose = require('mongoose');
 const orderController = require('../../controllers/orders_controller')
 const socketHelper = require('./socket_helper')
 
+// mongoose is responsbile for connecting to the database here we have given
+// localhost as our address that changes based upon the required scalability eg
+// if aws then we use that url etc
 mongoose.connect('mongodb://localhost:27017/foodx',{ useNewUrlParser: true });
 let db = mongoose.connection
 db.once("open", () => console.log("connected to the database"));
@@ -26,10 +29,14 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.use('/public', express.static('public'));
 
+// this is responsbile for rendering the dashboard that is responsible for getting the orders
+// placing the orders by putting in the count on the ui will create an order from dashboard
 app.use('/dashboard', function (req, res, next) {
   res.sendFile(path.join(__dirname,'../../public/', 'dashboard.html'));
 });
 
+// patch request is responsible updating the order with the given order id
+// this updation is called by Axios that is asynchronously
 app.patch('/order/:order_id', function(req, res, next){
   console.log("req received")
   console.log(req.params.order_id)
@@ -37,6 +44,10 @@ app.patch('/order/:order_id', function(req, res, next){
     res.status(200).json({"success": "true"})  
   })
 });
+
+// this url is responsible for getting orders page that displays complete orders in the kitcher
+// this url checks if the request is json/application or text/html 
+// based upon this it responds with either json or html 
 
 app.use("/orders", function(req,res,next){
   if(req.headers.accept.indexOf('application/json') !== -1)
