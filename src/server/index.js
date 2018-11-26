@@ -14,7 +14,8 @@ const socketHelper = require('./socket_helper')
 // mongoose is responsbile for connecting to the database here we have given
 // localhost as our address that changes based upon the required scalability eg
 // if aws then we use that url etc
-mongoose.connect('mongodb://localhost:27017/foodx',{ useNewUrlParser: true });
+const CONNECTION_URI = Process.env.MONGODB_URI || "mongodb://localhost:27017/foodx"
+mongoose.connect(CONNECTION_URI,{ useNewUrlParser: true });
 let db = mongoose.connection
 db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -116,4 +117,4 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(port, () => console.log('Listening on port 3000!'));
+server.listen(port, () => console.log(`Listening on port ${port}`));
