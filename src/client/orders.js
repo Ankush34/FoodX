@@ -13,7 +13,7 @@ export default class MainComponent extends React.Component
   {
     super(props);
     this.state = {
-      endpoint: `https://foodx-app.herokuapp.com:${process.env.PORT || 3000}`,
+      endpoint: `https://foodx-app.herokuapp.com`,
       items: []
     }
   }

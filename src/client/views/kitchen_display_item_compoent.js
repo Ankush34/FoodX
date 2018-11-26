@@ -8,7 +8,7 @@ export default class KitchenItemComponent extends React.Component
   {
       super(props);
       this.state = {
-        endpoint: `https://foodx-app.herokuapp.com:${process.env.PORT || 3000}`,
+        endpoint: `https://foodx-app.herokuapp.com`,
         total_items: this.props.total_items_completed, 
         id: this.props.id,
         current_order_status: this.props.status,
