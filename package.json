@@ -1,5 +1,5 @@
 {
-  "name": "FoodX",
+  "name": "foodx-app",
   "version": "1.0.0",
   "description": "Food Delivery Managing System",
   "main": "src/server/index.js",
