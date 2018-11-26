@@ -6,7 +6,7 @@ export default class OrderItem extends React.Component{
   {
       super(props)
       this.state = {
-        endpoint: "http://localhost:3000", 
+        endpoint: `https://foodx-app.herokuapp.com:${process.env.PORT || 3000}`,
         item_count_to_order: "",
         // this is where we are connecting to with sockets
       }
@@ -49,7 +49,7 @@ export default class OrderItem extends React.Component{
             <p onClick={()=>this.send()} className="btn btn-primary" style={{marginLeft: "100"}}>{ "Place Order" }</p>
           </div>
           <div className="col-md-3">
-            <a className={"btn btn-danger"} href={`http://localhost:3000/edit?name=${this.props.name}`}> Expected Inventory edit </a>
+            <a className={"btn btn-danger"} href={`https://foodx-app.herokuapp.com/edit?name=${this.props.name}`}> Expected Inventory edit </a>
           </div>
         </div>
       </div>

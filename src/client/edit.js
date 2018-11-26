@@ -10,7 +10,7 @@ export default class EditOrder extends React.Component
   {
     super(props);
     this.state = {
-      endpoint: "http://localhost:3000",
+      endpoint: `https://foodx-app.herokuapp.com:${process.env.PORT || 3000}`,
       name: "",
       count_to_update: 0
     }
@@ -39,7 +39,7 @@ export default class EditOrder extends React.Component
   }
   updateRecord = (event) => {
     console.log("update record called");
-    Axios.post("http://localhost:3000/update",{data: {name: this.state.name, count: this.state.count_to_update}}, {headers: {"Content-type": "application/json"}})
+    Axios.post("https://foodx-app.herokuapp.com/update",{data: {name: this.state.name, count: this.state.count_to_update}}, {headers: {"Content-type": "application/json"}})
     .then(res => {
       if(res.status === 200)
       {
@@ -47,7 +47,7 @@ export default class EditOrder extends React.Component
         const socket = socketIOClient(this.state.endpoint)
         socket.emit('expected_quantity_changed', {"name": this.state.name, "count": this.state.count_to_update})
         socket.on('expected_quantity_changed', (data) => {
-          window.location.replace("http://localhost:3000/dashboard")
+          window.location.replace("https://foodx-app.herokuapp.com/dashboard")
         })
         socket.close
       }

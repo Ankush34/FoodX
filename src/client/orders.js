@@ -13,13 +13,13 @@ export default class MainComponent extends React.Component
   {
     super(props);
     this.state = {
-      endpoint: "http://localhost:3000",
+      endpoint: `https://foodx-app.herokuapp.com:${process.env.PORT || 3000}`,
       items: []
     }
   }
 
   componentDidMount(){
-    Axios.get(`http://localhost:3000/orders`,{ headers: {"Content-Type": "application/json"}}).then(res => {
+    Axios.get(`https://foodx-app.herokuapp.com/orders`,{ headers: {"Content-Type": "application/json"}}).then(res => {
       console.log(res.data);
       this.setState({...this.state, items: res.data.map(element => { return({
       "id": element._id, 
