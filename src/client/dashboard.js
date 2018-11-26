@@ -14,7 +14,6 @@ export default class MainComponent extends React.Component
       "Punjabi Main Course": ["Paneer Chilli", "Paneer Tikka", "Paneer Butter Masala", "Mushroom Tikka Masala", "Mushroom Fry", "Paneer Fry", "Veg kadhai"], 
       "Indian Breads": ["Roti", "Chapati", "Punjabi Paratha", "Butter Naan", "Punjabi fulka", "Chapati", "Butter Paratha"]}
       const keys = Object.keys(menu_categories)
-      console.log(keys)
       return(
         <div>
           {

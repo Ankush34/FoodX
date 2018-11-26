@@ -38,12 +38,10 @@ export default class EditOrder extends React.Component
     }
   }
   updateRecord = (event) => {
-    console.log("update record called");
     Axios.post("https://foodx-app.herokuapp.com/update",{data: {name: this.state.name, count: this.state.count_to_update}}, {headers: {"Content-type": "application/json"}})
     .then(res => {
       if(res.status === 200)
       {
-        console.log("emitting event")
         const socket = socketIOClient(this.state.endpoint)
         socket.emit('expected_quantity_changed', {"name": this.state.name, "count": this.state.count_to_update})
         socket.on('expected_quantity_changed', (data) => {

@@ -29,22 +29,18 @@ export default class KitchenItemComponent extends React.Component
           current_order_status: props.status,
           total_items: props.total_items_completed,
         total_quantity_expected: props.total_quantity_expected})
-        console.log("asking component to update")
         return true
       }
   }
 
   statusChanged = () => {
-    console.log("sending the event to the server")
     const socket = socketIOClient(this.state.endpoint)
     socket.emit('status_changed', {"name": this.props.name, "id": this.props.id}) 
     socket.close
   }
 
   updateToComplete = (id) =>{
-    console.log("update product called")
     Axios.patch(`https://foodx-app.herokuapp.com/order/${id}`,{headers: {"Content-Type": "application/json"}}).then(res => { 
-      console.log(res.status);
       if(res.status === 200)
       {
         this.statusChanged()

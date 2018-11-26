@@ -9,7 +9,6 @@ const orderSchema = new mongoose.Schema({
     current_status: String
 }, {collection: "orders"});
 
-console.log(mongoose)
 const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order
